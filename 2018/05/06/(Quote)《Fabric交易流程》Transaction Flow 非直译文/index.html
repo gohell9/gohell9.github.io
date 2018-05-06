@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hyperledger Fabric," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="《Fabric交易流程》Transaction Flow 非直译文 原文链接(英)：https://hyperledger-fabric.readthedocs.io/en/latest/txflow.htmlQuote From (英中对照): https://blog.csdn.net/u010833547/article/details/79225080 简述1.区块链客户端把交易请求发给之">
+<meta name="keywords" content="Hyperledger Fabric">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(Quote)《Fabric交易流程》Transaction Flow 非直译文">
+<meta property="og:url" content="http://yoursite.com/2018/05/06/(Quote)《Fabric交易流程》Transaction Flow 非直译文/index.html">
+<meta property="og:site_name" content="XSH @ Space">
+<meta property="og:description" content="《Fabric交易流程》Transaction Flow 非直译文 原文链接(英)：https://hyperledger-fabric.readthedocs.io/en/latest/txflow.htmlQuote From (英中对照): https://blog.csdn.net/u010833547/article/details/79225080 简述1.区块链客户端把交易请求发给之">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-06T05:03:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="(Quote)《Fabric交易流程》Transaction Flow 非直译文">
+<meta name="twitter:description" content="《Fabric交易流程》Transaction Flow 非直译文 原文链接(英)：https://hyperledger-fabric.readthedocs.io/en/latest/txflow.htmlQuote From (英中对照): https://blog.csdn.net/u010833547/article/details/79225080 简述1.区块链客户端把交易请求发给之">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/06/(Quote)《Fabric交易流程》Transaction Flow 非直译文/"/>
+
+
+
+
+
+  <title>(Quote)《Fabric交易流程》Transaction Flow 非直译文 | XSH @ Space</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XSH @ Space</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/06/(Quote)《Fabric交易流程》Transaction Flow 非直译文/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XSH">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XSH @ Space">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">(Quote)《Fabric交易流程》Transaction Flow 非直译文</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-06T11:54:44+08:00">
+                2018-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>《Fabric交易流程》Transaction Flow 非直译文</p>
+<p>原文链接(英)：<a href="https://hyperledger-fabric.readthedocs.io/en/latest/txflow.html" target="_blank" rel="noopener">https://hyperledger-fabric.readthedocs.io/en/latest/txflow.html</a><br>Quote From (英中对照): <a href="https://blog.csdn.net/u010833547/article/details/79225080" target="_blank" rel="noopener">https://blog.csdn.net/u010833547/article/details/79225080</a></p>
+<h2 id="简述"><a href="#简述" class="headerlink" title="简述"></a>简述</h2><p>1.区块链客户端把交易请求发给之前约定好的所有背书节点(endorsing peer)。这里说明一下endorsing peer的选择是有一定范围的，并不是在所有的endorsing peer里随意选择，是由交易所属的ChainCode和该Chaincode所定义的Endorsement Policy共同决定的。</p>
+<p>2.背书节点收到上述信息后，首先用Client的公钥验证它的签名，背书节点执行智能合约（是模拟交易，不会写到账本里），将执行的结果反馈给客户端。</p>
+<p>3.客户端搜集“足够”多的背书节点的结果后，就说明这个交易通过了Endorsement阶段。通过之后就打包发给共识节点(orderers)。其中“足够”的数量是多少，取决于背书策略Endorsement Policy是多少.如果Client没有搜集到足够多的信息的话，这个交易就会被废止掉。Client可以选择重新发起交易。</p>
+<p>4.共识阶段虽然有不同的算法，不过目的都是把有效的交易加入新生成的区块，并通知所有节点使他们账本保存一致。共识节点将结果广播所有的节点(peer)。然后各节点再更新自己账本。</p>
+<h2 id="详细过程如下"><a href="#详细过程如下" class="headerlink" title="详细过程如下"></a>详细过程如下</h2><h3 id="Assumptions-假设"><a href="#Assumptions-假设" class="headerlink" title="Assumptions 假设"></a>Assumptions 假设</h3><p>假设Channel已经设置好配置，并正在运行着。所有用户的Peer节点应用程序已经注册了并且取得了用于权限验证的CA证书，以及相应的加密资料</p>
+<h3 id="发起交易"><a href="#发起交易" class="headerlink" title="发起交易"></a>发起交易</h3><h4 id="request"><a href="#request" class="headerlink" title="request"></a>request</h4><p>客户 A –&gt;[用]  App(SDK) –&gt;[发出]  request  –&gt; [到] peer A  &amp;  peer B &amp; …</p>
+<p> if endorsement 设定为对所有交易均可担保，<br>     so , request将被Peer节点接受。</p>
+<h4 id="构建提案-Proposal"><a href="#构建提案-Proposal" class="headerlink" title="构建提案 Proposal"></a>构建提案 Proposal</h4><p>App (Fabric SDK 的 API)  –&gt;[生成] Proposal( 去请求调用ChainCode 读/写 账本 ) , SDK 会 序列化 Proposal 为一个 结构化的文本格式 &amp; 用客户端用户的加密凭证为该“Proposal”生成一个签名。</p>
+<h3 id="Peer为担保的交易验证签名-amp-执行交易"><a href="#Peer为担保的交易验证签名-amp-执行交易" class="headerlink" title="Peer为担保的交易验证签名&amp;执行交易"></a>Peer为担保的交易验证签名&amp;执行交易</h3><h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><p> MSP（由CA 针对每个Peer节点进行颁发） 是一个Peer的组件，有了它才可以被允许对来自客户端的交易进行验证，以及对ChainCode处理后的交易结果进行签名。</p>
+<p> The Writing policy“写入规则” 在通道创建的时候被定义，他声明了哪些客户端用户有权利发起“交易提案”给哪些“Channel通道”。</p>
+<p>Peer 验证:</p>
+<p>（1）交易提案格式是否正确 </p>
+<p>（2）是否被提交过（防止重放攻击）</p>
+<p>（3）签名是否有效（签名是否为CA颁发的）</p>
+<p>（4）提交的客户端APP（客户A）是否被授权在该Channel执行 “发起交易”的操作指令.</p>
+<h4 id="执行交易"><a href="#执行交易" class="headerlink" title="执行交易"></a>执行交易</h4><p>担保的Peer节点会在调用ChainCode链码函数时将该“交易提案”作为参数传入。 链码会根据当前账本数据库的数据去处理交易结果，交易结果包含了：返回码、读取的数据集合、写入的数据集合（这个写入操作暂时不会对数据库执行）。 这个时候还不会将对账本进行更新。然后这些被ChainCode处理后的“交易结果”会带上Peer的签名一起返回给客户端的SDK程序，客户端的SDK程序会解析这些数据，提供给App做下一步处理.</p>
+<h3 id="检查Peer签名-amp-提案响应-的正确性"><a href="#检查Peer签名-amp-提案响应-的正确性" class="headerlink" title="检查Peer签名&amp; 提案响应 的正确性"></a>检查Peer签名&amp; 提案响应 的正确性</h3><p>App会去验证担保的Peer节点的签名是否正确，并比较 proposal responses“提案响应” 是否一样。如果Chaincode 只是查询账本，那么客户端的APP只会检查proposal responses“提案响应”的正确性，而不再提交 “交易”给 Ordering Service。 如果客户端的APP尝试提交“交易”给Ordering Service 更新账单，在提交之前需要确保所有Peer的担保签名都收集齐全（如，本例中需要收集Peer A节点和Peer B节点的 proposal responses 中 签名）。同时在这个体系结构中规定了，如果客户端App选择不检查proposal responses“提案响应”的正确性，或者转发一个未被担保的交易，这个“担保规则”依然会使这个交易在“提交验证阶段” 被交由 Peer节点强制性坚决地执行 “担保程序”。</p>
+<h3 id="客户将担保背书组装成交易"><a href="#客户将担保背书组装成交易" class="headerlink" title="客户将担保背书组装成交易"></a>客户将担保背书组装成交易</h3><p>App广播 “交易信息”给Ordering Service，里面包含了transaction proposal “交易提案”和 proposal responses“提案响应” 。 这个“交易信息”包括了 “账本的读写操作数据集合”（其实就是一堆指令集），以及担保节点Peer的签名信息，和Channel ID。Ordering Service不需要为了执行操作时而去再检查“交易信息”的内容，他只是简单的从Channel网络中接受信息就可以了。 每条通道的交易记录都会按照时间排序，并且按照不同Channel通道 将“交易记录”打包成区块。</p>
+<h3 id="交易被验证并提交"><a href="#交易被验证并提交" class="headerlink" title="交易被验证并提交"></a>交易被验证并提交</h3><p>所有打包好交易的区块会被传递给所有区块相对应的通道内的Peer节点。这些区块的交易会被验证,以确保交易已经获得了所有Peer节点的担保背书，并且交易记录中读集合的数据和上一次读取账本时一样未被篡改过。被验证通过的记录会被标记为 valid 已验证，未通过的验证的交易记录会被标记为 invalid 未验证。</p>
+<h3 id="账本更新"><a href="#账本更新" class="headerlink" title="账本更新"></a>账本更新</h3><p>每个Peer节点都会把区块追加到对应Channel通道的链上，对于每一个被标记为通过验证的交易的“写数据集合”会被提交给数据库。同时，会触发一个事件，去通知客户端App他提交的交易已经被写入区块链（并不可再修改），如果交易无效也会同样的通知客户端App。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hyperledger-Fabric/" rel="tag"># Hyperledger Fabric</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/06/区块链学习001/" rel="next" title="区块链学习001">
+                <i class="fa fa-chevron-left"></i> 区块链学习001
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/06/Github+Hexo做个人博客指南/" rel="prev" title="Github+Hexo做个人网页指南">
+                Github+Hexo做个人网页指南 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">XSH</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简述"><span class="nav-number">1.</span> <span class="nav-text">简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详细过程如下"><span class="nav-number">2.</span> <span class="nav-text">详细过程如下</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Assumptions-假设"><span class="nav-number">2.1.</span> <span class="nav-text">Assumptions 假设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发起交易"><span class="nav-number">2.2.</span> <span class="nav-text">发起交易</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#request"><span class="nav-number">2.2.1.</span> <span class="nav-text">request</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构建提案-Proposal"><span class="nav-number">2.2.2.</span> <span class="nav-text">构建提案 Proposal</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Peer为担保的交易验证签名-amp-执行交易"><span class="nav-number">2.3.</span> <span class="nav-text">Peer为担保的交易验证签名&amp;执行交易</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#验证"><span class="nav-number">2.3.1.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#执行交易"><span class="nav-number">2.3.2.</span> <span class="nav-text">执行交易</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查Peer签名-amp-提案响应-的正确性"><span class="nav-number">2.4.</span> <span class="nav-text">检查Peer签名&amp; 提案响应 的正确性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户将担保背书组装成交易"><span class="nav-number">2.5.</span> <span class="nav-text">客户将担保背书组装成交易</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#交易被验证并提交"><span class="nav-number">2.6.</span> <span class="nav-text">交易被验证并提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#账本更新"><span class="nav-number">2.7.</span> <span class="nav-text">账本更新</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XSH</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
