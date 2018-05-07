@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+<style>
+    .pace .pace-progress {
+        background: #0e122d; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="‘’’ fortune-zh                                       一首诗 cowsay -f elephant 我是奥巴马                    大象：我是奥巴马 fortune-zh |cowsay -f elephant|lolcat            一首诗+大象 sudo apt-get -y install cmatrix">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux操作命令基础">
+<meta property="og:url" content="http://yoursite.com/2018/05/07/Linux操作命令基础/index.html">
+<meta property="og:site_name" content="XSH @ Space">
+<meta property="og:description" content="‘’’ fortune-zh                                       一首诗 cowsay -f elephant 我是奥巴马                    大象：我是奥巴马 fortune-zh |cowsay -f elephant|lolcat            一首诗+大象 sudo apt-get -y install cmatrix">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-07T07:15:44.238Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux操作命令基础">
+<meta name="twitter:description" content="‘’’ fortune-zh                                       一首诗 cowsay -f elephant 我是奥巴马                    大象：我是奥巴马 fortune-zh |cowsay -f elephant|lolcat            一首诗+大象 sudo apt-get -y install cmatrix">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/07/Linux操作命令基础/"/>
+
+
+
+
+
+  <title>Linux操作命令基础 | XSH @ Space</title>
+  
+
+
+
+
+
+
+
+
+  
+ 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XSH @ Space</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/07/Linux操作命令基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XSH">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XSH @ Space">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux操作命令基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-07T15:14:57+08:00">
+                2018-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>‘’’</p>
+<pre><code>fortune-zh                                       一首诗
+cowsay -f elephant 我是奥巴马                    大象：我是奥巴马
+fortune-zh |cowsay -f elephant|lolcat            一首诗+大象
+sudo apt-get -y install cmatrix                 黑客帝国既视感 （ctrl+c 结束）
+cmatrix [-abBflohnsVx] [-C color]
+
+
+
+sudo apt-get -y install tree    
+    举例tree命令，其他部分命令也类似。
+    运行 tree 命令时提示 command not  found。说明没有安装这个程序或者命令的母程序。运行前面命令安装即可。
+
+
+
+ubuntu系统（另一种linux系统）：为了安全默认隐藏了root用户，且密码是随机的。
+        sudo passwd root（更改root用户的密码）
+        su root     （su切换用户，切换到root用户）
+            不要经常用root用户！不是一个好习惯。
+
+
+
+ctrl + l              清屏（Xshell里）
+clear                   清屏（Xshell里）
+$                      $  代表普通用户
+#                       #  代表root用户
+man rm                 看rm（可替换为其他命令）命令的详细解释文档
+whereis ls            查看 ls 命令及其帮助文档所在的位置
+which ls            查看 ls 命令二进制文件所在的位置
+
+
+
+linux 的文件夹的大小都是4096：文件夹可以视为指向多个文件的变量。
+
+
+
+whoami                显示当前登录用户     （解决哲学第一大问题：我是谁？）
+pwd                    显示当前路径        （解决哲学第二大问题：我在哪？）
+touch                  创建文件
+cat                    查看文件
+mkdir                创建文件夹       rmdir（删除文件夹）
+    mkdir .test        创建隐藏文件夹.test        （可用ls -a查看到）
+
+
+
+alias  cp=&apos;mv&apos;        
+            多用于将长命令短小化，    
+            可以将mv的功能赋给cp。
+            本次开机有效，重启后失效。
+    alias vim=&apos;vim +q&apos;    恶搞，闪退vim，2333！
+    unalias vim            撤销恶搞。
+
+
+
+# ll  ==  ls -l
+# alias ll  (查看ll代表的命令，ll只是别名，代表 ls -alF)
+# ls  
+    ls -alih
+    ls
+    ls -l
+
+
+
+# cd              (change directory  cd )
+    cd           home家目录
+    cd ~         home家目录
+    cd ..          上一级目录
+    cd /a/b/c    直接去哪个目录
+    cd -        刚才的目录    
+    cd /        / 根目录
+    cd !$          把上个命令的参数作为cd参数使用。
+    cd .config    可进入隐藏文件夹（ls看不到文件夹）
+
+
+
+# cp
+    cp  f fd                将f复制到fd路径下
+    cp  fa fd/fb            将fa文件内容复制到fd路径下fb文件内 
+    cp a.txt &gt;&gt; b.txt        把 a.txt追加b.txt后面
+    cp a.txt &gt; b.txt        把 a.txt覆盖b.txt 
+    cp ../config/* ./
+
+
+
+# rm
+    rm -rf fa                 把fa文件（文件夹）全部强力删除（-rf  r 递归   f 不提示）
+    rm --help                 提示，帮助
+
+
+
+# mv 
+    mv *1/*2/*3/*4 ../tmp/     将*1/*2/*3/*4几个文件暂时移动到上一级目录的tmp文件夹里面。
+
+
+
+# ln
+    ln    a.txt a.ln         (创建a.ln为a.txt的硬链接，与源文件同样大小，内容一致。
+    ln -s a.txt a.ln     (创建a.ln为a.txt的软链接==符号链接，仅仅指向源文件。
+
+
+
+# find             
+    find ./ -name &quot;README&quot;        在当前路径找 名字中含有&quot;README&quot;的文件
+    find ./ -name README        在当前路径找 名字中含有&quot;README&quot;的文件
+    find ./ -name *.py
+    find ./ -name *install*
+    find ./ -size +8k
+    find ./ -size -8k
+    find ./ -name &quot;*config*&quot; -size +8k
+    find ./ -name &quot;config&quot; -type d
+    find ./ -type d
+    find ./ -name &apos;*360*&apos; exec rm -rf {} \;
+
+
+
+# locate
+    sudo apt-get -y install locate
+    sudo updatedb
+    在linux建立全盘文件（名）数据库，在数据库搜索。适合全盘搜索。比find省运算资源
+    locate config*
+
+
+
+# grep
+    grep bash *
+    grep -v bash *
+    grep -v bash a.txt
+    find -name *config* | xargs grep bootstrap | grep def            (xargs 在文件内容里面过滤)
+
+
+
+vim
+    f2            打开目录结构
+    f3            换背景颜色
+    f4            插入版权信息
+    f5            运行
+    f6             检查python语法错误
+
+    ctrl + s     保存，冻结屏幕
+    ctrl + q     解除冻结屏幕    
+
+    esc            进入命令模式，
+    esc + ：      进入 末行模式。
+
+    i             当前位置，插入（进入 编辑模式。）
+    a             当前下一个位置，插入（进入 编辑模式。）
+    I             本行行首，插入（进入 编辑模式。）
+    A            本行行尾，插入（进入 编辑模式。）
+    o             当前下一行，插入（进入 编辑模式。）
+    O             当前上一行，插入（进入 编辑模式。）
+    hjkl        可以左下上右移动光标
+    gg            文档第一行
+    G             文档末行
+    0            行首
+    $            行尾
+    ^            非空格行首
+    w             单词开始
+    b             下一个单词开始
+    e             单词结尾
+
+    7yy          复制下面7行
+    p             粘贴
+    v y p       v后上下左右移动光标选择复制区 ，选择结束，  粘贴。
+
+    dd             删除整行
+    x             删除光标所在字符
+    u             撤销
+    ctrl + r     反撤销（撤销u）
+
+    /(xxxx,回车)     xxxx 代表要搜索内容，回车后：（n：向下找，N：向上找）    
+
+    ctrl + v ，I ， # ， esc 。            注释ctrl+v选择的区域。
+
+    esc + :q!        不保存退出。
+
+
+
+
+# zip
+    sudo apt-get -y install zip
+         zip tmp.zip a.txt 将a.txt（可以多个文件）压缩到tmp.zip里面去。（源文件在后面：跟cp，mv等命令源文件位置相反。）
+         unzip tmp.zip -d ./tmp     解压到tmp文件夹里
+
+# gzip
+    gzip a.txt                         压缩且并不保留源文件，生成名为a.txt.gz的包 
+    gzip -c a.txt &gt; a.txt.gz        压缩且并保留源文件，生成名为a.txt.gz的包
+
+    gzip -d a.txt.gz                             解压缩
+    gunzip -d a.txt.gz                            解压缩
+
+# tar    （没有压缩功能）  [常用的一般都是 tar的命令!!]
+    tar -cvf ./test/sum.tar 1 2 3 4            将 1 2 3 4 打包成sum.tar
+    tar -cvzf ./test/sum.tar.gz 1 2 3 4            将 1 2 3 4 压缩打包成sum.tar.gz（常用）    
+    tar -xvzf sum.tar.gz                     解压到当前目录
+    tar -xvzf sum.tar.gz -C ../tmp             解压到 ../tmp     （常用）
+            c     建立新包
+            f     命名（f 放在最后）
+            v     显示过程信息
+            z     压缩，没有没有压缩则tar的参数不需要加z
+
+
+
+# -rw-rw-r-- 1 xiaoming xiaoming  136 Dec 31 15:18 sum.tar.gz  (ll举例，不存在这样的)
+   -rwxrw-r-- 1
+    # - 代表非文件夹 （若是d：代表文件夹）
+    # rwx 可读,写，执行 （本用户的权限）
+    # rw- 可读,写       （与本用户同组用户的权限）
+    # r-- 可读            （其他用户的权限）
+        4 2 1  （r=读=4，w=写=2，x=执行=1  ；chmod可更改权限）
+    # 1   代表硬链接数（自身也是硬链接）
+
+
+
+    # xiaoming             第一个代表权限用户  
+    # xiaoming             第二个代表权限用户组员
+    # 136                 代表文件大小
+    # Dec 31            月份 日期
+    # sum.tar.gz        文件名    
+# du -d 1 -h               看文件夹的大小 （&apos;-d 1&apos; 代表只查看1层文件夹，也可以看2层；&apos;-h&apos;显示为 k,M,g的大小单位）
+# du -h                   看所有文件的大小
+# df -h                    看整个磁盘使用状况。
+
+
+
+    # chmod 改权限
+    chmod 440 改为 只读    
+
+
+
+查询当前进程
+# ps -aux |grep python
+  ps -ef | grep python
+    xiaoming     8439  0.0  0.0   5100   836 pts/2    S+   16:48   0:00 grep --color=auto python
+    用户      pid                                                      进程名字
+    如果kill 8439杀不掉一个进程，就用kill -9 8439.（kill -9,强力kill）
+
+
+
+# top          动态显示进程，间断刷新。
+ctrl + z      把进程放在后台。
+fg             再放回前台。
+# jobs         可以查看在后台运行的进程
+
+
+
+lsof -i 查看占用端口
+
+
+
+netstat -antup | grep python   查看python有关程序网络情况
+</code></pre><p>‘’’</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/06/Makedown在线编辑以及语法/" rel="next" title="Makedown在线编辑以及语法">
+                <i class="fa fa-chevron-left"></i> Makedown在线编辑以及语法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">XSH</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XSH</span>
+
+  
+</div>
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+ 
+</body>
+</html>
+
+ 
+ <!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
